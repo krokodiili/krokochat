@@ -1,4 +1,7 @@
-Krokochat is a chat single-page application 
+Krokochat 0.0.1
+Simple chat SPA with controllable youtube player
+
+Currently the app is wip and not stable!
 
 Features:
 -Register & Login system (Google login coming soon)
@@ -17,8 +20,10 @@ Main tools:
   
 Future:
   -Avatars
-  -Emojis
-  -
+  -Rooms
+  -User status
+  -Room admin panel
+  -Easy website import 
   
   
 	
