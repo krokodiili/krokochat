@@ -1,0 +1,131 @@
+<style>
+    #chat {
+        width: 100%;
+
+
+        background-color: white;
+    }
+
+    #chatbox {
+        height: 600px;
+        overflow-y: scroll;
+        word-wrap: break-word;
+        padding: 0px;
+        list-style-type: none;
+    }
+
+    #onlinebox {
+        height: 500px;
+        overflow-y: scroll;
+        word-wrap: break-word;
+        list-style-type: none;
+
+    }
+
+    #message {
+        width: 50%;
+        height: 100%;
+        padding-bottom: 80px;
+    }
+
+    #avatar {
+        width: 50px;
+    }
+
+    #logo {
+        width: 300px;
+    }
+
+    #player{
+        top: 50px;
+        left: 55%;
+        position: absolute;
+    }
+
+    #playerControl{
+        top: 450px;
+        left: 55%;
+        position: absolute;
+        width: 40%;
+    }
+
+
+</style>
+
+<div class="well" id="chat">
+    <div class="row">
+        <div class="col-lg-10">
+            <img src="../../img/krokochat.png" id="logo"></img>
+        </div>
+        <div class="col-lg-2">
+            <button class="btn btn-danger" ng-click="vm.disconnect()">Log out</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10">
+            <p>Welcome, {{ vm.loggedInUser }} </p>
+        </div>
+        <div class="col-lg-2">
+            <p>Online Users: {{vm.userCount}}</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-10">
+            <div class="well" id="chatbox">
+                <li id="messages" ng-repeat="message in vm.messages track by $id(message)">
+                    <div id="message">
+                        <div class="col-lg-1">
+                            <img src="../../img/avatar.png" id="avatar"> </img>
+                        </div>
+                        <div class="col-lg-11">
+                            {{message.time}} {{message.username}}: <br> {{message.message}}
+                        </div>
+                    </div>
+                </li>
+
+                <div id="player"></div>
+                <div id="playerControl">
+                    <form ng-submit="vm.queueVideo()">
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" placeholder="youtube" ng-model="vm.videoId" name="videoId" required>
+                    </div>
+                        <div class="col-lg-4">
+                            <button type="submit" class="btn btn-primary btn-block">Queue({{vm.videoCount}})</button>
+                        </div>
+                    </form>
+                        <div class="col-lg-4">
+                            <button class="btn btn-danger btn-block" ng-click="vm.skip()">Skip {{vm.skipCount}}/{{vm.userCount / 100 * 65}}</button>
+                        </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-2">
+            <div class="well" id="onlinebox">
+                <li id="users" ng-repeat="user in vm.users"><img src="../../img/avatar.png" id="avatar"> </img>
+                    {{user.name}}
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" id="inputbox">
+        <form name="vm.messageForm" ng-submit="vm.addMessage()">
+            <div class="col-lg-12">
+                <div class="input-group">
+                    <input id="btn-input" type="text" class="form-control" id="messagebar" autocomplete="off"
+                           placeholder="Blah blah blah.." ng-model="vm.message" name="message" required>
+                    <span class="input-group-addon">
+                    <i class="fui-chat"></i>
+                </span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script src="../../js/youtubetv.js"></script>

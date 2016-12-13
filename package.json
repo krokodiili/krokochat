@@ -1,0 +1,33 @@
+{
+  "name": "krokochat",
+  "version": "0.0.1",
+  "description": "Simple chat app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krokodiili/krokochat.git"
+  },
+  "keywords": [
+    "chat"
+  ],
+  "author": "Lauri Meltti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krokodiili/krokochat/issues"
+  },
+  "homepage": "https://github.com/krokodiili/krokochat#readme",
+  "dependencies": {
+    "angular": "^1.5.9",
+    "angular-jwt": "^0.1.8",
+    "angular-route": "^1.5.9",
+    "bcryptjs": "^2.3.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "jsonwebtoken": "^7.1.9",
+    "mongoose": "^4.6.8",
+    "socket.io": "^1.5.1"
+  }
+}

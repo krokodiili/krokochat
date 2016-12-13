@@ -1,0 +1,80 @@
+<style>
+    #registerbox {
+        text-align: center;
+        width: 20%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: 20px;
+        overflow: auto;
+    }
+</style>
+
+<div class="well" id="registerbox">
+    <h2>krokochat</h2>
+    <br>
+    <form name="vm.registerForm" ng-submit="vm.addUser()">
+        <div class="form-group has-feedback">
+            <input type="text" placeholder="Username" class="form-control"
+                   required ng-minlength="3" ng-maxlength="16" ng-model="vm.username" name="username">
+            <span class="form-control-feedback" ng-show="vm.registerForm.username.$invalid">
+                <i class="fui-cross-circle" style="color : red"></i>
+            </span>
+
+            <span class="form-control-feedback" ng-show="vm.registerForm.username.$valid">
+                <i class="fui-check-circle" style="color : green"></i>
+            </span>
+        </div>
+
+        <div class="form-group has-feedback">
+            <input type="text" placeholder="Email" class="form-control"
+                   ng-pattern='/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i'
+                   ng-model="vm.email" name="email" required>
+            <span class="form-control-feedback"
+                  ng-show="vm.registerForm.email.$pristine || registerForm.email.$invalid">
+                <i class="fui-cross-circle" style="color : red"></i>
+            </span>
+
+            <span class="form-control-feedback" ng-show="vm.registerForm.email.$dirty && registerForm.email.$valid">
+                <i class="fui-check-circle" style="color : green"></i>
+            </span>
+        </div>
+
+        <div class="form-group has-feedback">
+            <input type="password" placeholder="Password" class="form-control"
+                   required ng-minlength="3" ng-maxlength="16" ng-model="vm.password" name="password">
+            <span class="form-control-feedback" ng-show="vm.registerForm.password.$invalid">
+                <i class="fui-cross-circle" style="color : red"></i>
+            </span>
+
+            <span class="form-control-feedback" ng-show="vm.registerForm.password.$valid">
+                <i class="fui-check-circle" style="color : green"></i>
+            </span>
+        </div>
+
+        <div class="form-group has-feedback">
+            <input type="password" placeholder="Retype Password" class="form-control"
+                   required ng-minlength="3" ng-maxlength="16" ng-model="vm.passwordRe" name="passwordRe">
+            <!-- DO TEH MARK FOR PASSWORD ==
+            <span class="form-control-feedback" ng-show="vm.registerForm.password.$invalid">
+                <i class="fui-cross-circle" style="color : red"></i>
+            </span>
+
+            <span class="form-control-feedback" ng-show="vm.registerForm.password.$valid">
+                <i class="fui-check-circle" style="color : green"></i>
+            </span>
+            --->
+        </div>
+
+        <p class="alert-danger" ng-show="vm.isSubmitted"> {{vm.error}} </p>
+
+
+        <button type="submit" class="btn-primary btn-lg btn-block">Submit</button>
+
+
+    </form>
+    <p>Already have an account? Click <a href="/#/">here!</a></p>
+
+
+</div>

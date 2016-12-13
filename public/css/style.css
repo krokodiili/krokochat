@@ -1,0 +1,7 @@
+body {
+    background-image: url("../img/bgkroko.jpg");
+}
+
+.ng-cloak, [ng-cloak], [ng\:cloak] {
+    display :none !important;
+}

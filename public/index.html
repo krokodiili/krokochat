@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="chat">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width" initial-scale="1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+
+    <title>Krokochat</title>
+</head>
+<body ng-cloak>
+
+<div ng-view></div>
+
+<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/video.js"></script>
+<script src="js/flat-ui.min.js"></script>
+<script src="js/application.js"></script>
+<script src="node_modules/angular/angular.js"></script>
+<script src="node_modules/angular-route/angular-route.js"></script>
+<script src="angular-app/app.js"></script>
+<script src="angular-app/login/login-controller.js"></script>
+<script src="angular-app/chat-display/chat-controller.js"></script>
+<script src="angular-app/register/register-controller.js"></script>
+<script src="angular-app/auth/auth-factory.js"></script>
+<script src="angular-app/auth/auth-interceptor.js"></script>
+<script src="node_modules/angular-jwt/dist/angular-jwt.js"></script>
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+<script src="angular-app/angular-socket-io/socket.js"></script>
+<script src="angular-app/services/chatSocket.js"></script>
+
+
+
+</body>
+</html>
