@@ -20,9 +20,7 @@ app.use("/node_modules", express.static(__dirname + "/node_modules"));
 app.use("/api", routes);
 
 //set and listen port
-app.set('port', (process.env.PORT || 3000));
-
-http.listen(3000, function () {
+http.listen(process.env.PORT || 3000, function () {
     console.log("listening on port 3000");
 });
 
