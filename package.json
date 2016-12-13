@@ -29,5 +29,8 @@
     "jsonwebtoken": "^7.1.9",
     "mongoose": "^4.6.8",
     "socket.io": "^1.5.1"
+  },
+  "engines": {
+    "node": "6.9.1"
   }
 }
