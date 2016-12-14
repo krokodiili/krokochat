@@ -76,27 +76,54 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
             vm.users = users;
             console.log(vm.users);
             vm.userCount = connectCounter;
+            vm.skipThreshold = Math.ceil(vm.tvCount / 100 * 65);
         });
     });
 
-    ChatSocket.on("user disconnection", function (users, connectCounter) {
+    ChatSocket.on("user disconnection", function (users, connectCounter, tvCount) {
         $scope.$apply(function () {
             audioDc.play();
             vm.users = users;
             vm.userCount = connectCounter;
-
+            vm.tvCount = tvCount;
+            vm.skipThreshold = Math.ceil(vm.tvCount / 100 * 65);
         });
     });
 
     window.onbeforeunload = function (e) {
         ChatSocket.emit("user disconnection", vm.loggedInUser);
-        $http.post("/api/users/logout",{username: vm.loggedInUser}); //NOT WORKINGg
+        $http.post("/api/users/logout", {username: vm.loggedInUser}); //NOT WORKINGg
     };
 
     //TV RELATED STUFF
     vm.skipCount = 0;
     vm.videoCount = 0;
+    vm.playerOn = true;
+    vm.tvCount = 0;
+    vm.skipThreshold = 0;
     let userHasSkipped = false;
+    let currentVideo = "DCoY5ot8zg4";
+    let currentVideoTime = 0;
+
+    ChatSocket.emit("tvOn");
+
+    setTimeout(function () {
+        player.loadVideoById(currentVideo, currentVideoTime, "large");
+    }, 1000);
+
+    vm.playerPower = function () {
+        if (vm.playerOn) {
+            vm.playerOn = false;
+            player.stopVideo();
+            ChatSocket.emit("tvOff")
+        } else {
+            vm.playerOn = true;
+            ChatSocket.emit("tvOn");
+            setTimeout(function () {
+                player.loadVideoById(currentVideo, currentVideoTime, "large");
+            }, 1000);
+        }
+    };
 
     vm.queueVideo = function () {
         let videoId = vm.videoId;
@@ -105,7 +132,7 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
     };
 
     vm.skip = function () {
-        if (!userHasSkipped) {
+        if (!userHasSkipped && vm.playerOn) {
             vm.skipCount++;
             ChatSocket.emit("skip");
             userHasSkipped = true;
@@ -115,22 +142,34 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
 
     ChatSocket.on("next video", function (videoId, skipCount, videosOnQueue, videoCount) {
         vm.videoCount = videoCount;
-        if (videosOnQueue) {
+        vm.skipCount = skipCount;
+        currentVideo = videoId;
+        if (videosOnQueue && vm.playerOn) {
             player.loadVideoById(videoId, "large");
-            vm.skipCount = skipCount;
             userHasSkipped = false;
             setTimeout(function () {
-                    ChatSocket.emit("next video", player.getDuration());
+                ChatSocket.emit("next video", player.getDuration());
             }, 1000);
-        } else {
-            vm.skipCount = skipCount;
+        } else if (vm.playerOn) {
             player.loadVideoById(videoId, "large");
         }
-
     });
 
     ChatSocket.on("skip", function (skipCount) {
         vm.skipCount = skipCount;
+    });
+
+    ChatSocket.on("tvOff", function (tvCount) {
+        vm.tvCount = tvCount;
+        vm.skipThreshold = Math.ceil(vm.tvCount / 100 * 65);
+    });
+
+    ChatSocket.on("tvOn", function (tvCount, cVT, cV) {
+        console.log("on");
+        vm.tvCount = tvCount;
+        vm.skipThreshold = Math.ceil(vm.tvCount / 100 * 65);
+        currentVideoTime = cVT;
+        currentVideo = cV;
     });
 
 

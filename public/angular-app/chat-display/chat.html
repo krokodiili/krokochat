@@ -2,7 +2,6 @@
     #chat {
         width: 100%;
 
-
         background-color: white;
     }
 
@@ -36,17 +35,21 @@
         width: 300px;
     }
 
-    #player{
-        top: 50px;
-        left: 55%;
+    #playerOff {
+        text-align: center;
+        top: 80px;
+        left: 53.3%;
         position: absolute;
+        background-color: gray;
+        width: 640px;
+        height: 365px;
     }
 
-    #playerControl{
-        top: 450px;
-        left: 55%;
+    #youtubeTV {
+        top: 50px;
+        left: 52%;
         position: absolute;
-        width: 40%;
+        background-color: black;
     }
 
 
@@ -84,27 +87,46 @@
                     </div>
                 </li>
 
-                <div id="player"></div>
-                <div id="playerControl">
-                    <form ng-submit="vm.queueVideo()">
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" placeholder="youtube" ng-model="vm.videoId" name="videoId" required>
+                <div class="well" id="youtubeTV">
+                    <div id="player" ng-show="vm.playerOn" class="ng-hide"></div>
+
+                    <div id="playerControl">
+                        <form ng-submit="vm.queueVideo()">
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" placeholder="youtube" ng-model="vm.videoId"
+                                       name="videoId" required>
+                            </div>
+                            <div class="col-lg-3">
+                                <button type="submit" class="btn btn-primary btn-block">Queue({{vm.videoCount}})
+                                </button>
+                            </div>
+                        </form>
+                        <div class="col-lg-3">
+                            <button class="btn btn-danger btn-block" ng-click="vm.skip()">Skip
+                                {{vm.skipCount}}/{{vm.skipThreshold}}
+                            </button>
+
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-success btn-block" ng-click="vm.playerPower()"><i class="fui-power"></i></button>
+
+                        </div>
                     </div>
-                        <div class="col-lg-4">
-                            <button type="submit" class="btn btn-primary btn-block">Queue({{vm.videoCount}})</button>
-                        </div>
-                    </form>
-                        <div class="col-lg-4">
-                            <button class="btn btn-danger btn-block" ng-click="vm.skip()">Skip {{vm.skipCount}}/{{vm.userCount / 100 * 65}}</button>
-                        </div>
 
                 </div>
+
+                <div id="playerOff" ng-show="!vm.playerOn" class="ng-hide">
+                    <p>Press the power button to see more videos!</p>
+                </div>
+
+
             </div>
 
         </div>
         <div class="col-lg-2">
             <div class="well" id="onlinebox">
-                <li id="users" ng-repeat="user in vm.users"><img src="../../img/avatar.png" id="avatar"> </img>
+                <li id="users" ng-repeat="user in vm.users">
+                    <img src="../../img/avatar.png" id="avatar"> </img>
                     {{user.name}}
                 </li>
             </div>
@@ -125,7 +147,6 @@
         </form>
     </div>
 </div>
-
 
 
 <script src="../../js/youtubetv.js"></script>
