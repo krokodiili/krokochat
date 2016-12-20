@@ -11,6 +11,19 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
     vm.users = [];
     vm.userCount = 0;
 
+    function checkDoubleConnection() {
+        for(let i = 0; i < vm.users.length; i++) {
+            console.log(vm.users[i]);
+            if(vm.users[i].username === vm.loggedInUser) {
+                $location.path("/");
+                ChatSocket.emit("user disconnection", vm.loggedInUser);
+            }
+        }
+
+    }
+
+    checkDoubleConnection();
+
     // MESSAGE RELATED STUFF
 
     //get all messages on page load
@@ -91,8 +104,10 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
     });
 
     window.onbeforeunload = function (e) {
+
+        $http.post("/api/users/logout", {username: vm.loggedInUser}); //NOT WORKING
+
         ChatSocket.emit("user disconnection", vm.loggedInUser);
-        $http.post("/api/users/logout", {username: vm.loggedInUser}); //NOT WORKINGg
     };
 
     //TV RELATED STUFF
@@ -149,7 +164,7 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
             userHasSkipped = false;
             setTimeout(function () {
                 ChatSocket.emit("next video", player.getDuration());
-            }, 1000);
+            }, 2500);
         } else if (vm.playerOn) {
             player.loadVideoById(videoId, "large");
         }

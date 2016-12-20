@@ -85,6 +85,7 @@ module.exports.authenticate = function (req, res, next) {
 };
 
 module.exports.logout = function (req, res) {
+    console.log("logging user out");
     let username = req.body.username;
 
     User.findOne({
@@ -95,7 +96,7 @@ module.exports.logout = function (req, res) {
             user.save();
             console.log("logging out " + user);
         } else {
-            console.log(err);
+            console.log("error " + err);
             res.status(400).json(err);
         }
     });

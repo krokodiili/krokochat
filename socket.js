@@ -3,7 +3,7 @@ const socketio = require("socket.io");
 let tvCount = 0;
 let videoQueue = [];
 let users = [];
-let connectCount = 0;
+let connectCount = users.length;
 let skipCount = 0;
 let counter = 1;
 let videoCount = 0;
@@ -16,10 +16,10 @@ module.exports.listen = function (http) {
     io = socketio.listen(http);
 
     io.on("connection", function (socket) {
-        connectCount++;
         socket.on("user connection", function (user) {
             console.log(user + " has connected");
             users.push({name: user});
+            connectCount = users.length;
             io.emit("user connection", users, connectCount, tvCount);
         });
 
@@ -29,7 +29,7 @@ module.exports.listen = function (http) {
                 console.log(users[i].name);
                 if (users[i].name === dcUser) {
                     users.splice(i, 1);
-                    connectCount--;
+                    connectCount = users.length;
                     tvCount--;
                     io.emit("user disconnection", users, connectCount, tvCount);
                 }
