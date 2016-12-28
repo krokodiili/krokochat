@@ -25,6 +25,9 @@ Future:
   -Room admin panel
   -Easy website import 
   
+  Live example at:
+  http://chat.kroko.pro
+  
   
 	
 
