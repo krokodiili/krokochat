@@ -70,7 +70,7 @@ module.exports.authenticate = function (req, res, next) {
     let headerExists = req.headers.authorization;
     if (headerExists) {
         var token = req.headers.authorization.split(' ')[1]; //--> Authorization Bearer xxx
-        jwt.verify(token, "s3cr3t", function (error, decoded) {
+        jwt.verify(token, process.env.SECRET, function (error, decoded) {
             if (error) {
                 console.log(error);
                 res.status(401).json("Unauthorized");
