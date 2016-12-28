@@ -1,4 +1,4 @@
-Krokochat 0.1.0
+Krokochat 0.1.1
 Simple chat SPA with controllable youtube player
 
 Currently the app is wip and not stable!

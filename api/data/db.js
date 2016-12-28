@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const dburl = "mongodb://test:testing@ds021026.mlab.com:21026/krokochat";
+const dburl = process.env.DB_URL;
 
 mongoose.connect(dburl);
 
