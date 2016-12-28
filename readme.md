@@ -1,4 +1,4 @@
-Krokochat 0.0.1
+Krokochat 0.1.0
 Simple chat SPA with controllable youtube player
 
 Currently the app is wip and not stable!
@@ -6,7 +6,7 @@ Currently the app is wip and not stable!
 Features:
 -Register & Login system (Google login coming soon)
 -Realtime working simple chat system
--Queuable youtube player for watching videos together (wip)
+-Queuable youtube player for watching videos together
 
 Main tools:
   -JAVASCRIPT!
