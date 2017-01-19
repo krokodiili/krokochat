@@ -11,6 +11,7 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
     vm.users = [];
     vm.userCount = 0;
 
+    //NOT WORKING, FIND A BETTER WAY!
     function checkDoubleConnection() {
         for(let i = 0; i < vm.users.length; i++) {
             console.log(vm.users[i]);
@@ -110,7 +111,7 @@ function ChatController($http, $window, jwtHelper, ChatSocket, $scope, $location
         ChatSocket.emit("user disconnection", vm.loggedInUser);
     };
 
-    //TV RELATED STUFF
+    //TV RELATED STUFF (MOVE TO ITS OWN CONTROLLER)
     vm.skipCount = 0;
     vm.videoCount = 0;
     vm.playerOn = true;
