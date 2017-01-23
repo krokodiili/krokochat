@@ -23,7 +23,8 @@ Future:
   -Rooms
   -User status
   -Room admin panel
-  -Easy website import 
+  -Easy website import
+  -Search input for videos
   
   Live example at:
   http://chat.kroko.pro
