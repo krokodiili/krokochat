@@ -9,7 +9,7 @@ let counter = 1;
 let videoCount = 0;
 let timer = null;
 let currentVideoTime = 0;
-let currentVideo = "PxWYNqeWqyY";
+let currentVideo = "TY8bZHo6iRg";
 
 module.exports.listen = function (http) {
 //connection
@@ -93,7 +93,7 @@ module.exports.listen = function (http) {
             skipCount = 0;
             console.log(videoQueue + "!!!!!!");
             if (videoQueue.length < 1) {
-                io.emit("next video", "PxWYNqeWqyY", skipCount, false, videoCount);
+                io.emit("next video", "TY8bZHo6iRg", skipCount, false, videoCount);
                 currentVideoTime = 0;
                 counter = 1;
             } else {
